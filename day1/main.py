@@ -1,4 +1,4 @@
-def part1():
+def get_sum_of_all():
     all_elfs = []
     curr = 0
     with open('day1/input.txt') as f:
@@ -9,9 +9,18 @@ def part1():
             else:
                 curr += int(line.strip())
 
-    return max(all_elfs)
+def part1():
+    all_elves = get_sum_of_all()
+
+    return max(all_elves)
+
+def part2():
+    all_elves = get_sum_of_all()
+
+    return sum(sorted(all_elves, reverse=True)[0:3])
 
 def main():
-    print("starting day 1...")
+    print("Day 1")
 
-    print(part1())
+    print(f"Part 1: {part1()}")
+    print(f"Part 2: {part2()}")
