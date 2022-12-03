@@ -1,42 +1,72 @@
-something = {
-    "X": {
-        "points": 1,
-        "opponent": "A",
-        "beats": "C",
-    },
-    "Y": {
-        "points": 2,
-        "opponent": "B",
-        "beats": "A",
-    },
-    "Z": {
-        "points": 3,
-        "opponent": "C",
-        "beats": "B",
+def part1():
+    play_map = {
+        "X": {
+            "points": 1,
+            "opponent": "A",
+            "beats": "C",
+        },
+        "Y": {
+            "points": 2,
+            "opponent": "B",
+            "beats": "A",
+        },
+        "Z": {
+            "points": 3,
+            "opponent": "C",
+            "beats": "B",
+        }
     }
-}
-
-
-def get_points():
     points = 0
     with open('day2/input.txt') as f:
         for line in f.readlines():
-            p1, p2 = line.strip().split(" ")
+            elf, me = line.strip().split(" ")
             
-            if p1 == something[p2]["opponent"]: # Draw
+            if elf == play_map[me]["opponent"]: # Draw
                 points += 3
-            elif p1 == something[p2]["beats"]: # Win
+            elif elf == play_map[me]["beats"]: # Win
                 points += 6
             
-            points += something[p2]["points"]
+            points += play_map[me]["points"]
 
     return points
 
+def part2():
+    play_map = {
+        "A": {
+            "X": 3,
+            "Y": 1,
+            "Z": 2
+        },
+        "B": {
+            "X": 1,
+            "Y": 2,
+            "Z": 3
+        },
+        "C": {
+            "X": 2,
+            "Y": 3,
+            "Z": 1
+        }
+    }
+    points = 0
+    with open('day2/input.txt') as f:
+        for line in f.readlines():
+            elf, outcome = line.strip().split(" ")
+            
+            if outcome == "Y": # Draw
+                points += 3
+            elif outcome == "Z": # Win
+                points += 6
+            
+            points += play_map[elf][outcome]
 
-def part1():
-    return get_points()
+    return points
 
 def main():
     print("Day 2")
 
     print(f"\tPart 1: {part1()}")
+    print(f"\tPart 2: {part2()}")
+
+if __name__ == "__main__":
+    main()
