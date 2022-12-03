@@ -8,6 +8,8 @@ def get_sum_of_all():
                 curr = 0
             else:
                 curr += int(line.strip())
+    
+    return all_elfs
 
 def part1():
     all_elves = get_sum_of_all()
@@ -22,5 +24,5 @@ def part2():
 def main():
     print("Day 1")
 
-    print(f"Part 1: {part1()}")
-    print(f"Part 2: {part2()}")
+    print(f"\tPart 1: {part1()}")
+    print(f"\tPart 2: {part2()}")
