@@ -35,6 +35,10 @@ def get_moves(input_data):
     return moves
 
 
+def get_top_crates(crates):
+    return "".join([crates[key][0] for key in sorted(crates)])
+
+
 def part1():
     with open("day5/input.txt") as f:
         lines = f.readlines()
@@ -47,11 +51,20 @@ def part1():
         )
         crates[move["from"]] = crates[move["from"]][move["number"] :]
 
-    return "".join([crates[key][0] for key in sorted(crates)])
+    return get_top_crates(crates)
 
 
 def part2():
-    ...
+    with open("day5/input.txt") as f:
+        lines = f.readlines()
+    crates = get_crates(lines)
+    moves = get_moves(lines)
+
+    for move in moves:
+        crates[move["to"]] = crates[move["from"]][: move["number"]] + crates[move["to"]]
+        crates[move["from"]] = crates[move["from"]][move["number"] :]
+
+    return get_top_crates(crates)
 
 
 def main():
